@@ -2,7 +2,7 @@
 # This generates Apology videos
 # Daniel Kogan, 6/30/2020
 
-import gTTS
+import gtts
 from moviepy.editor import *
 from moviepy.audio.fx.volumex import volumex
 import os, random, ffmpy, asyncio
