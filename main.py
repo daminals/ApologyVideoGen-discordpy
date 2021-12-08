@@ -27,7 +27,7 @@ bs = ["My waitress at taco bell got my order wrong three months ago", "I couldn'
       "My brita filter cracked", 
       "Mercury was in retrograde",
       "My stock portfolio dropped two cents",
-      "Bitcoin went down",
+      "Bitcoin went down", 
       ]
 
 middle = ["I don't want your forgiveness, just the open space to be able to say how deeply sorry I am.  ",
