@@ -21,7 +21,7 @@ apology_intros = ["I made a severe and continuous lapse in my judgement, and I d
 
 bs = ["My waitress at taco bell got my order wrong three months ago", "I couldn't find my right sock this morning",
       "My mommy took away my PS vita", "My sugar daddy stopped funding my twizzler addiction",
-      "I scratched my iPhone screen", "I was tried for first degree murder", "I'm a scorpio",
+      "I scratched my iPhone screen", "I was tried for first degree murder", "I was born a scorpio",
       "I was really hungry at the time"
       "I broke my iPhone by putting it too close to the cutting board, but it's ok my Dad will just buy me a new one",
       "My brita filter cracked", 
@@ -37,9 +37,10 @@ middle = ["I don't want your forgiveness, just the open space to be able to say 
           "When I lost my sponsorship with Manscaped, I realized how wrong I was.  "
           ]
 
-challenge = ["It's just been so hard for me since",
+challenge = ["It's just been so hard for me since ",
              "Life has always been difficult for me, for instance ",
-             "Life for me has been like that tiktok taylor swift audio: Screaming! Crying! ever since",
+             "Life for me has been like that tiktok taylor swift audio: Screaming! Crying! ever since ",
+             "I've been feeling so not epic gamer because "
              ]
 
 wrongness_list = ["is the worst thing I have ever done in my entire life, no contest",
