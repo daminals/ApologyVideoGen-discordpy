@@ -1,4 +1,5 @@
 aiohttp==3.6.2
+aniso8601==9.0.1
 async-timeout==3.0.1
 attrs==19.3.0
 beautifulsoup4==4.9.1
@@ -6,6 +7,7 @@ cairocffi==1.1.0
 certifi==2020.6.20
 cffi==1.14.0
 chardet==3.0.4
+charset-normalizer==2.0.9
 click==7.1.2
 decorator==4.4.2
 discord==1.0.1
@@ -24,12 +26,15 @@ Pillow==7.2.0
 proglog==0.1.9
 pycparser==2.20
 python-dotenv==0.13.0
-pyttsx3==2.90
+pytz==2021.3
 requests==2.24.0
 scipy==1.5.0
 six==1.15.0
 soupsieve==2.0.1
 tqdm==4.47.0
+typing_extensions==4.0.1
 urllib3==1.25.9
 websockets==8.1
+Werkzeug==2.0.2
 yarl==1.4.2
+zipp==3.6.0
