@@ -10,7 +10,6 @@ from script import *
 
 # TODO: add subtitles 🥺😳
 # TODO: Organize different steps into separate functions (ex: tts to tts function)
-# TODO: Make into a website and/or discord bot -- COMPLETED DISC BOT
 # TODO: DEBUG!!! It crashes and is unable to load the video every so often, and that must be fixed
 
 
