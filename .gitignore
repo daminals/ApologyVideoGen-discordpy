@@ -269,3 +269,5 @@ Temp-Files/*
 !Finished/.gitkeep
 !Temp-Files/.gitkeep
 react/package-lock.json
+
+Assets/icon
