@@ -1,6 +1,7 @@
 # script.py
 # Daniel Kogan
 # 12.24.2021
+# this is a library
 import os, random
 
 apology_intros = ["I made a severe and continuous lapse in my judgement, and I don’t expect to be forgiven. I’m "
