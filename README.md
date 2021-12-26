@@ -3,7 +3,7 @@
 
 _This repo is the discord bot version, currently hosted on heroku, the GUI app version can be found [here](https://github.com/daminals/ApologyVideoGenerator/tree/MacApp)_
 
-A problem our generation faces is the need to apologize for the horrible things we have done.
+The greatest problem generation faces is the need to apologize for the horrible things we have done.
 Youtube sensations do so many horrible things, and apologize in such a generic and uniform way, the apology video has become its own 'unique' genre (I say 'unique' because these videos are all practically the same)
 
 In order to maximize efficiency, a combination of sad videos with a text to speech function could easily generate these videos, saving precious time.
