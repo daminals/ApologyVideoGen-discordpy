@@ -12,6 +12,7 @@ from discord.ext import commands, tasks
 TOKEN = os.environ.get('TOKEN', 3)
 bot = commands.Bot(command_prefix='s!')
 
+
 from main import *
 
 bot.remove_command('help')
@@ -34,12 +35,13 @@ async def sorry(ctx, *, sor):
     print('transforming ' + sor + ' into an apology video')
     await ctx.send('Processing... [this usually takes about 2 minutes...]')
     ID = gen_ID(4)
+    
     try:
-        await main(True, ID, sor)
+        await create_video(True, ID, sor)
     except Exception as e:
         await ctx.send(f'Whoopsie {ctx.author.mention}, I suffered a *' + str(e) + '* error, I\'ll try again now')
         try:
-            await main(True, ID, sor)
+            await create_video(True, ID, sor)
         except Exception as e:
             ctx.send(
                 f'*{str(e)}* is just too powerful {ctx.author.mention}. I was unable to produce your video, I suppose I now need to make an apology video of my own')

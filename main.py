@@ -5,6 +5,7 @@
 import gtts
 from moviepy.editor import *
 from moviepy.audio.fx.volumex import volumex
+import concurrent.futures
 import os, random, ffmpy, asyncio
 from script import *
 
@@ -32,12 +33,17 @@ def compression(input_name, output_name):
     print(ff.cmd)
     ff.run()
 
+async def create_video(bool_inp, ID, apolo):
+    loop  = asyncio.get_running_loop()
+    with concurrent.futures.ProcessPoolExecutor() as pool:
+        result = await loop.run_in_executor(
+                            pool, main, bool_inp, ID, apolo)
 
-async def main(bool_inp,ID,apolo=''):
+def main(bool_inp,ID,apolo=''):
     if bool_inp:
         reason = apolo
     else:
-        reason = input('Why are you apologizing? ')
+        reason = input('Why are you apologizing? ') 
     script = create_script(reason)
     print('Processing audio...')
     
@@ -60,7 +66,6 @@ async def main(bool_inp,ID,apolo=''):
     backgroundMusic = backgroundMusic.set_duration(audioClip.duration)
     NewaudioClip = CompositeAudioClip([audioClip, backgroundMusic]).set_duration(audioClip.duration)
     print('Audio has been processed....')
-
     print('Processing video...')
 
     clip1 = random.choice(os.listdir("./Assets/clips"))
@@ -80,7 +85,7 @@ async def main(bool_inp,ID,apolo=''):
     final_clip = concatenate_videoclips([clip1, clip2, clip3])
     final_clip = final_clip.subclip(0, audioClip.duration)
 
-    async def Process(final_clip, ID, NewaudioClip):
+    def Process(final_clip, ID, NewaudioClip):
         try:
             final_clip.set_audio(NewaudioClip).write_videofile("Temp-Files/apology" + ID + ".mov", codec="libx264",
                                                                audio_codec='aac', audio=True,
@@ -95,10 +100,10 @@ async def main(bool_inp,ID,apolo=''):
 
         except Exception as e:
             print(e)
-            await Process(final_clip, ID, NewaudioClip)
+            Process(final_clip, ID, NewaudioClip)
 
     try:
-        await Process(final_clip, ID, NewaudioClip)
+        Process(final_clip, ID, NewaudioClip)
     except Exception as e:
         print(e)
         clutter()
