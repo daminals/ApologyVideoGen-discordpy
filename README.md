@@ -24,18 +24,21 @@ The bot works asynchronously rather than engaging in blocking (as it used to) du
 
 # Next Steps
 
-### > API Integration
+<details>
+<summary>API Integration</summary>
 
 Rather than have each separate instance of the script.py function, I would like to host the React app and use the flask backend as an API that can accept script-building requests, minimizing repeated code and allowing for script updates that immediately affect all Apology Video Generator ports
-
-### > Store Assets Centrally
+</details>
+<details>
+<summary>Store Assets Centrally</summary>
 
 Store Assets in centralized folder accessible to all Apology Video ports hosted on the server
-
-### > More RAM
+</details>
+<details>
+<summary>More RAM</summary>
 
 More RAM would allow the the bot to be more scalable and process way more apology videos at once
-
+</details>
 # Installation
 ```
 $ touch .env
