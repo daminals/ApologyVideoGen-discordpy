@@ -39,6 +39,7 @@ Store Assets in centralized folder accessible to all Apology Video ports hosted 
 
 More RAM would allow the the bot to be more scalable and process way more apology videos at once
 </details>
+
 # Installation
 ```
 $ touch .env
