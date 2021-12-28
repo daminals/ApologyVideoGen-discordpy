@@ -35,7 +35,7 @@ def compression(input_name, output_name):
 
 async def create_video(bool_inp, ID, apolo):
     loop  = asyncio.get_running_loop()
-    with concurrent.futures.ProcessPoolExecutor() as pool:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=3) as pool:
         result = await loop.run_in_executor(
                             pool, main, bool_inp, ID, apolo)
 
