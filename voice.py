@@ -15,14 +15,14 @@ class voice(commands.Cog):
     async def on_ready(self):
         print('sorry.py is active')
         
-    @commands.command(aliases=['voice'])
+    @commands.command(aliases=['voice']) # join vc command
     async def vc(self, ctx, *, reason=None):
         vc_state = ctx.author.voice
         if not (vc_state):
             await ctx.reply("You are not currently in a vc")
             return False
         voice_channel = vc_state.channel
-        # now that boilerplat is out of the way, we will create the audiofile
+        # now that boilerplate is out of the way, we will create the audiofile
         audio_file = await create_audio(reason)
         connected_channel = await voice_channel.connect()
         connected_channel.play(discord.FFmpegPCMAudio(audio_file))
@@ -31,7 +31,7 @@ class voice(commands.Cog):
         # remove clutter
         os.remove(audio_file)
         
-    @commands.Cog.listener()
+    @commands.Cog.listener() # error handling
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send('Missing required argument')
