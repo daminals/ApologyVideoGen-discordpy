@@ -30,6 +30,16 @@ class voice(commands.Cog):
         await connected_channel.disconnect()
         # remove clutter
         os.remove(audio_file)
-                
+        
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Missing required argument')
+            return False
+        elif isinstance(error, commands.CommandNotFound):
+            await ctx.message.add_reaction("😳")
+            return False
+
+        
 def setup(bot):
     bot.add_cog(voice(bot))
