@@ -10,7 +10,6 @@ from sorry_engine import *
 class voice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.sorry_channel = self.bot.get_channel(916044583870267393)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -29,11 +28,8 @@ class voice(commands.Cog):
         connected_channel.play(discord.FFmpegPCMAudio(audio_file))
         await asyncio.sleep(audio_length(audio_file))
         await connected_channel.disconnect()
-        # back up apology audio
-        await self.sorry_channel.send(reason, file=discord.File(audio_file))
+        # remove clutter
         os.remove(audio_file)
-        
                 
-
 def setup(bot):
     bot.add_cog(voice(bot))
