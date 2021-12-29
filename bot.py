@@ -60,6 +60,9 @@ async def help(ctx):
     embed.add_field(name='**s!sorry (reason)**',
                     value='Use s!sorry to create your own apology!',
                     inline=False)
+    embed.add_field(name='**s!vc (reason)**',
+                    value='Use s!vc to have sorrybot join vc and read aloud an apology!',
+                    inline=False)
     await ctx.channel.send(embed=embed)
 
 if __name__ == '__main__':
