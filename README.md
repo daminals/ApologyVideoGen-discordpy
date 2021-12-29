@@ -45,7 +45,7 @@ More RAM would allow the the bot to be more scalable and process way more apolog
 <details>
 <summary> Heroku Integration </summary>
 
-Before self-hosting this project, the apology video generator was hosted on heroku for over year and a half. Here I learned how to add external buildpacks to make the project compatible with FFmpeg, had to work around heroku's 500mb memory limit while maintaining a functional app, and not using concurrency as I only had access to one worker. I learned a lot about external hosts from this experience, and working with Heorku's slugs, environment keys, and accessing my code from an external service, and this knowledge was later put to use when I created my own hosting server
+Before self-hosting this project, the apology video generator was hosted on heroku for over year and a half. Here I learned how to add external buildpacks to make the project compatible with FFmpeg, had to work around heroku's 500mb memory limit while maintaining a functional app, and not using concurrency as I only had access to one worker. I learned a lot about external hosts from this experience, and working with Heroku's slugs, environment keys, and accessing my code from an external service, and this knowledge was later put to use when I created my own hosting server
 
 </details>
 
