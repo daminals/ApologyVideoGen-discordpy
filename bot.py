@@ -3,7 +3,7 @@
 # Daniel Kogan, 06/01/2020
 
 import os, sys
-import discord, random, asyncio, multiprocessing
+import discord, random, asyncio #now using pycord because discordpy no longer maintained
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,9 +11,9 @@ from discord.ext import commands, tasks
 
 TOKEN = os.environ.get('TOKEN', 3)
 bot = commands.Bot(command_prefix='s!')
+# TODO: add voice only support for VC
 
-
-from main import *
+from sorry_engine import *
 
 bot.remove_command('help')
 
@@ -62,5 +62,7 @@ async def help(ctx):
                     inline=False)
     await ctx.channel.send(embed=embed)
 
+bot.load_extension('voice')
 
-bot.run(TOKEN)
+if __name__ == '__main__':
+    bot.run(TOKEN)
