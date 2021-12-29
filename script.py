@@ -25,7 +25,7 @@ middle = ["I don't want your forgiveness, just the open space to be able to say 
           "The goal of my content is always to entertain, I never meant to let it get out of hand.  ",
           "The inhumane actions that I have done were truly despicable.  ",
           "It was once I lost one thousand insta followers that I understood the error of my ways.   "
-          f'When I lost my sponsorship with {random.choice(["Manscaped","NordVPN", "Among Us", "Audible","skill share"])}, I realized how wrong I was.  '
+          f'When I lost my sponsorship with {random.choice(["Manscaped","NordVPN", "Among Us", "Audible","skill share", "League of Legends"])}, I realized how wrong I was.  '
           ]
 
 challenge = ["It's just been so hard for me since ",
@@ -45,5 +45,5 @@ thank_u = ["Thank you everyone for giving me this time to apologize for my actio
 def create_script(reason):
     script = random.choice(apology_intros)
     script += f".  I am deeply and truly sorry for {reason.lower()}. It was wrong, disgraceful, and I promise it will never happen again,  .   {reason.lower()} {random.choice(wrongness_list)}. . .  {random.choice(middle)}"
-    script += f' {random.choice(thank_u)}. {random.choice(challenge)} {random.choice(bs)}. I love each of you guys so   so much. Thank you, and Don\'t forget to SMASH that like button and subscribe for more content!       .    '
+    script += f' {random.choice(thank_u)}. {random.choice(challenge)} {random.choice(bs)}. I love each of you guys so. so much. Thank you, and Don\'t forget to SMASH that like button and subscribe for more content!       .    '
     return script

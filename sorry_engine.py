@@ -13,7 +13,6 @@ from script import *
 # TODO: Organize different steps into separate functions (ex: tts to tts function)
 # TODO: DEBUG!!! It crashes and is unable to load the video every so often, and that must be fixed
 
-
 def gen_ID(char):
     ID = ''
     for i in range(char):
@@ -25,13 +24,16 @@ def clutter():
         if not i=='.gitkeep':
             os.remove('Temp-Files/' + i)
 
-
 def compression(input_name, output_name):
     inp = {input_name: None}
     outp = {output_name: f'-vcodec libx264 -crf 23'}
     ff = ffmpy.FFmpeg(inputs=inp, outputs=outp)
     print(ff.cmd)
     ff.run()
+    
+def audio_length(audio_path):
+    audio = AudioFileClip(audio_path)
+    return audio.duration
 
 async def create_video(bool_inp, ID, apolo):
     loop  = asyncio.get_running_loop()
@@ -44,6 +46,7 @@ async def create_audio(reason):
     with concurrent.futures.ProcessPoolExecutor(max_workers=5) as pool:
         result = await loop.run_in_executor(
                 pool, create_audio_blocking_function, reason)
+        return 'Assets/audio.aac'
 
 def create_audio_blocking_function(reason):
     try:
@@ -104,11 +107,9 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
                 "Temp-Files/apology" + ID + ".mov", codec="libx264", audio_codec='aac',
                 audio=True, temp_audiofile='Temp-Files/temp-audio.m4a', fps=30,
                 remove_temp=True)
-
         except Exception as e:
             print(e)
             Process(final_clip, ID, NewaudioClip)
-
     try:
         Process(final_clip, ID, NewaudioClip)
     except Exception as e:
@@ -131,4 +132,4 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
 
 if __name__ == '__main__':
     ID = gen_ID(4)
-    asyncio.run(main(False,ID))
+    asyncio.run(create_video(False,ID))
