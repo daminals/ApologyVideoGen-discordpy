@@ -62,7 +62,6 @@ async def help(ctx):
                     inline=False)
     await ctx.channel.send(embed=embed)
 
-bot.load_extension('voice')
-
 if __name__ == '__main__':
+    bot.load_extension('voice')
     bot.run(TOKEN)

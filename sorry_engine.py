@@ -37,25 +37,32 @@ async def create_video(bool_inp, ID, apolo):
     loop  = asyncio.get_running_loop()
     with concurrent.futures.ProcessPoolExecutor(max_workers=3) as pool:
         result = await loop.run_in_executor(
-                            pool, main, bool_inp, ID, apolo)
+                            pool, create_video_blocking_function, bool_inp, ID, apolo)
 
-def main(bool_inp,ID,apolo=''):
-    if bool_inp:
-        reason = apolo
-    else:
+async def create_audio(reason):
+    loop  = asyncio.get_running_loop()
+    with concurrent.futures.ProcessPoolExecutor(max_workers=5) as pool:
+        result = await loop.run_in_executor(
+                pool, create_audio_blocking_function, reason)
+
+def create_audio_blocking_function(reason):
+    try:
+        script = create_script(reason) # create a script with the reason
+        print('Processing audio...')
+        audio = gtts.gTTS(script) # create the voiceover
+        audio.save('Assets/audio.aac') # download script into an audio file
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def create_video_blocking_function(bool_inp, ID, apology_reason=None):
+    if bool_inp: # if this is true, use the function call var
+        reason = apology_reason
+    else: # if false, command line input for apology
         reason = input('Why are you apologizing? ') 
-    script = create_script(reason)
-    print('Processing audio...')
-    
-    #ttsEngine = pyttsx3.init()
-    #ttsEngine.save_to_file(script, 'Assets/audio.aac')
-    #ttsEngine.runAndWait()
-    audio = gtts.gTTS(script)
-
-    audio.save('Assets/audio.aac')
-
+    create_audio_blocking_function(reason)
     audioClip = AudioFileClip("Assets/audio.aac")
-
     MusicFile = random.choice(os.listdir('./Assets/music'))
     # print(MusicFile)
     try:
