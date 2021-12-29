@@ -58,6 +58,8 @@ Through this project I discovered FFmpeg, which I have been using ever since. Pr
 
 # Installation
 ```
+$ git clone https://github.com/daminals/ApologyVideoGen-discordpy.git
+$ cd ApologyVideoGen-discordpy
 $ touch .env
 $ echo TOKEN=\'YOUR_DISCORD_BOT_TOKEN\' >> .env
 $ ./build
