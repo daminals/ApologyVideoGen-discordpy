@@ -21,6 +21,7 @@ class voice(commands.Cog):
         if not (vc_state):
             await ctx.reply("You are not currently in a vc")
             return False
+        await ctx.message.add_reaction("✅")
         voice_channel = vc_state.channel
         # now that boilerplate is out of the way, we will create the audiofile
         audio_file = await create_audio(reason)
