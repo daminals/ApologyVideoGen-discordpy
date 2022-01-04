@@ -10,7 +10,8 @@ load_dotenv()
 from discord.ext import commands, tasks
 
 TOKEN = os.environ.get('TOKEN', 3)
-bot = commands.Bot(command_prefix='s!')
+
+bot = commands.Bot(command_prefix='s!') # until pycord updates
 # TODO: add voice only support for VC
 
 from sorry_engine import *
