@@ -56,6 +56,21 @@ Through this project I discovered FFmpeg, which I have been using ever since. Pr
 
 </details>
 
+<details>
+<summary> Asynchronous Functions </summary>
+
+In order to service many users at once, discord bots implement asynchronous functions. I learned python concurrency to run video creation and returning on seperate threads to avoid blocking.
+
+</details>
+
+<details>
+<summary> Linux Command Line </summary>
+
+When I moved the project over to a personal server, I also learned a lot about linux processes, logging through journals, and systemd. I had total control, however if I gave that to the user, too many videos could crash my system.
+
+</details>
+
+
 # Installation
 ```
 $ git clone https://github.com/daminals/ApologyVideoGen-discordpy.git
