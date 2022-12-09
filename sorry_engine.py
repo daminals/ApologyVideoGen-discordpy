@@ -4,8 +4,15 @@
 
 import gtts
 from moviepy.editor import *
+from moviepy.video.tools.subtitles import SubtitlesClip
 from moviepy.audio.fx.volumex import volumex
 import concurrent.futures
+
+from pydub import AudioSegment
+from pysrt import SubRipItem
+import speech_recognition as sr
+import pysrt
+
 import os, random, ffmpy, asyncio
 from script import *
 
@@ -24,9 +31,23 @@ def clutter():
         if not i=='.gitkeep':
             os.remove('Temp-Files/' + i)
 
+def gtts_to_srt(tts):
+    subs = pysrt.SubRipFile()
+    # subs = SubRipFile()
+    sentences = tts.text.split()
+    time = 0
+    for index, token in enumerate(sentences):
+      start = time
+      end = time+350  
+      time+=350
+      text = token
+      # Add a new subtitle to the SubRipFile object
+      subs.append(SubRipItem(index=index, start=start, end=end, text=text))
+    subs.save("Assets/audio.srt")
+
 def compression(input_name, output_name):
     inp = {input_name: None}
-    outp = {output_name: f'-vcodec libx264 -crf 23'}
+    outp = {output_name: f'-vcodec libx264 -crf 23'} #  -vf subtitles=Assets/audio.srt
     ff = ffmpy.FFmpeg(inputs=inp, outputs=outp)
     print(ff.cmd)
     ff.run()
@@ -66,7 +87,20 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
         reason = input('Why are you apologizing? ') 
     create_audio_blocking_function(reason)
     audioClip = AudioFileClip("Assets/audio.aac")
+
+    audio.save('Assets/audio.aac')
+    gtts_to_srt(audio)
+    # create_srt_from_audio("Assets/audio.aac") # creates a caption file
+    print('processing srt')
+    
+    audioClip = AudioFileClip("Assets/audio.aac")
+    subtitles = SubtitlesClip("Assets/audio.srt")
+    # subtitles = TextFileClip("Assets/audio.srt")
+
+
     MusicFile = random.choice(os.listdir('./Assets/music'))
+    while MusicFile == "./Assets/music/.DS_Store":
+      MusicFile = random.choice(os.listdir('./Assets/music'))
     # print(MusicFile)
     try:
         backgroundMusic = AudioFileClip("Assets/music/" + MusicFile)
@@ -91,9 +125,19 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
     clip3 = VideoFileClip("Assets/clips/" + clip3)
 
     # backgroundMusic = volumex(backgroundMusic, 0.1)
-
     final_clip = concatenate_videoclips([clip1, clip2, clip3])
     final_clip = final_clip.subclip(0, audioClip.duration)
+    
+    # final_clip = CompositeVideoClip([final_clip, subtitles.set_pos(('center','bottom'))])
+    
+    # subtitles.set_duration(final_clip.duration)
+  
+    # final_clip.set_audio(subtitles)
+    # final_clip = concatenate([final_clip, subtitles])
+    
+    duration = audioClip.duration # define duration to be used later
+    # final_clip = CompositeVideoClip([final_clip, text_clip])
+    final_clip.duration = duration
 
     def Process(final_clip, ID, NewaudioClip):
         try:
@@ -127,6 +171,11 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
 
     final_clip.close()
     os.remove('Assets/audio.aac')
+    os.remove('Assets/audio.srt')
+    try:
+      os.remove('Assets/music/.DS_Store')
+    except:
+      pass
     clutter()
 
 

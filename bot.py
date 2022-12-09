@@ -41,7 +41,10 @@ async def sorry(ctx, *, reason):
     try:
         await create_video(True, ID, reason)
     except Exception as e:
-        await ctx.send(f'Whoopsie {ctx.author.mention}, I suffered a *' + str(e) + '* error, I\'ll try again now')
+        if (len(str(e)) + 15 > 2000):
+          print(str(e))
+        else:
+          await ctx.send(f'Whoopsie {ctx.author.mention}, I suffered a *' + str(e) + '* error, I\'ll try again now')
         try:
             await create_video(True, ID, reason)
         except Exception as e:
