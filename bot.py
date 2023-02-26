@@ -2,6 +2,8 @@
 # Handles discord bot functionality
 # Daniel Kogan, 06/01/2020
 
+# TODO: create working ci/cd pipeline to push changes to server
+
 import os, sys
 import discord, random, asyncio #now using pycord because discordpy no longer maintained
 from discord import app_commands
@@ -9,7 +11,7 @@ from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
 load_dotenv()
-
+intents = discord.Intents.all()
 TOKEN = os.environ.get('TOKEN', 3)
 
 bot = commands.Bot(command_prefix='s!', intents=intents) # until pycord updates
@@ -25,15 +27,17 @@ async def updown(message):
 
 @bot.event
 async def on_ready():
-    print('bot.py is active')
+    await bot.tree.sync()
     servers = list(bot.guilds)
     server_num = len(servers)
     await bot.change_presence(
         activity=discord.Activity(type=discord.ActivityType.watching, name=f"over {server_num} servers| s!help"))
+    print('bot.py is active')
 
 @bot.hybrid_command(name='sorry')
 async def sorry(ctx, *, reason):
     sorry_channel = bot.get_channel(916044583870267393)
+    await ctx.defer()
     await ctx.message.add_reaction("✅")
     print('transforming ' + reason + ' into an apology video')
     await ctx.send('Processing... [this usually takes about 2 minutes...]')
