@@ -4,14 +4,15 @@
 
 import os, sys
 import discord, random, asyncio #now using pycord because discordpy no longer maintained
+from discord import app_commands
+from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
 load_dotenv()
-from discord.ext import commands, tasks
 
 TOKEN = os.environ.get('TOKEN', 3)
 
-bot = commands.Bot(command_prefix='s!') # until pycord updates
+bot = commands.Bot(command_prefix='s!', intents=intents) # until pycord updates
 # TODO: add voice only support for VC
 
 from sorry_engine import *
@@ -30,7 +31,7 @@ async def on_ready():
     await bot.change_presence(
         activity=discord.Activity(type=discord.ActivityType.watching, name=f"over {server_num} servers| s!help"))
 
-@bot.command(name='sorry')
+@bot.hybrid_command(name='sorry')
 async def sorry(ctx, *, reason):
     sorry_channel = bot.get_channel(916044583870267393)
     await ctx.message.add_reaction("✅")
