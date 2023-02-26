@@ -34,15 +34,19 @@ async def on_ready():
         activity=discord.Activity(type=discord.ActivityType.watching, name=f"over {server_num} servers| s!help"))
     print('bot.py is active')
 
+@bot.event
+async def on_command(ctx):
+  if not (ctx.interaction):
+    await ctx.message.add_reaction('✅')
+
 @bot.hybrid_command(name='sorry')
 async def sorry(ctx, *, reason):
     sorry_channel = bot.get_channel(916044583870267393)
     await ctx.defer()
-    await ctx.message.add_reaction("✅")
     print('transforming ' + reason + ' into an apology video')
-    await ctx.send('Processing... [this usually takes about 2 minutes...]')
+    if not (ctx.interaction):
+      await ctx.reply('Processing... [this usually takes about 2 minutes...]')
     ID = gen_ID(4)
-    
     try:
         await create_video(True, ID, reason)
     except Exception as e:
@@ -52,15 +56,14 @@ async def sorry(ctx, *, reason):
           await ctx.send(f'Whoopsie {ctx.author.mention}, I suffered a *' + str(e) + '* error, I\'ll try again now')
         try:
             await create_video(True, ID, reason)
+            message = await ctx.reply(f'{ctx.author.mention} Your apology video is finished! Enjoy!',
+                   file=discord.File("Finished/apology" + ID + ".mp4"))
+            await updown(message)
+            message2 = await sorry_channel.send(reason, file=discord.File("Finished/apology" + ID + ".mp4")) # back up the apology videos
+            await updown(message2) # honestly this is really unnecessary but #consistency
         except Exception as e:
             ctx.send(
                 f'*{str(e)}* is just too powerful {ctx.author.mention}. I was unable to produce your video, I suppose I now need to make an apology video of my own')
-    message = await ctx.send(f'{ctx.author.mention} Your apology video is finished! Enjoy!',
-                   file=discord.File("Finished/apology" + ID + ".mp4"))
-    await updown(message)
-    message2 = await sorry_channel.send(reason, file=discord.File("Finished/apology" + ID + ".mp4")) # back up the apology videos
-    await updown(message2) # honestly this is really unnecessary but #consistency
-    
     os.remove("Finished/apology" + ID + ".mp4")
 
 @bot.command(name='help')

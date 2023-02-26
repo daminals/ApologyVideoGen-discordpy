@@ -107,6 +107,7 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
     except Exception as e:
         print(e)
         print(MusicFile)
+        return False
     backgroundMusic = backgroundMusic.set_duration(audioClip.duration)
     NewaudioClip = CompositeAudioClip([audioClip, backgroundMusic]).set_duration(audioClip.duration)
     print('Audio has been processed....')
@@ -159,6 +160,7 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
     except Exception as e:
         print(e)
         clutter()
+        return False
 
     print('Video processed...')
     print('Compressing video...')
@@ -166,6 +168,7 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
         compression("Temp-Files/apology" + ID + ".mov", "Finished/apology" + ID + ".mp4")
     except Exception as e:
         print(e)
+        return False
     os.remove("Temp-Files/apology" + ID + ".mov")
     print('Video compressed...')
 
@@ -177,6 +180,7 @@ def create_video_blocking_function(bool_inp, ID, apology_reason=None):
     except:
       pass
     clutter()
+    return True
 
 
 if __name__ == '__main__':
